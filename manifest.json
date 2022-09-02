@@ -3,7 +3,7 @@
 
   "manifest_version": 2,
   "name": "Aprelendo",
-  "version": "1.0.2",
+  "version": "1.1",
   "description": "Add texts to your Aprelendo library.",
   "homepage_url": "https://www.aprelendo.com",
   "icons": {
@@ -13,16 +13,13 @@
   },
 
   "permissions": [
-    "tabs"
+    "activeTab"
   ],
 
   "browser_action": {
     "default_icon": "icons/aprelendo48.png",
-    "default_title": "Add to Aprelendo"
-  },
-
-  "background": {
-    "scripts": ["background.js"]
+    "default_title": "Add to Aprelendo",
+    "default_popup": "popup/choose_lang.html"
   }
 
 }
