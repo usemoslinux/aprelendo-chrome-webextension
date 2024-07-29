@@ -2,7 +2,7 @@
 
 This repository contains the source code for the Chrome Webextension "Aprelendo," which is available on the Chrome Web Store.
 
-## About
+## About Aprelendo
 
 [Aprelendo.com](https://www.aprelendo.com) is a language learning site that implements the "total reading" method, which enables users to develop their comprehension (reading & listening) and communication (writing & speaking) skills.
 
