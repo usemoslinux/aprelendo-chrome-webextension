@@ -2,8 +2,10 @@
  * Listen for clicks on the buttons, and redirect to the appropriate page
  */
 document.addEventListener("click", (e) => {
-    chrome.runtime.sendMessage({"lang": e.target.id});
-    window.close();
+    if (e.target.classList.contains("button")) {
+        chrome.runtime.sendMessage({"lang": e.target.id});
+        window.close();
+    }
 });
 
 /**
