@@ -132,3 +132,8 @@
 .button.vi {
   background-image: url("../icons/flags/vi.svg");
 }
+
+#popup-content:focus {
+  outline: 0;
+  box-shadow: none;
+}
