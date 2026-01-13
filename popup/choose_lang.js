@@ -13,6 +13,21 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     }
 
+    // Ask background script for detected language of the current tab
+    chrome.runtime.sendMessage({ action: 'getDetectedLanguage' }, (response) => {
+        if (chrome.runtime.lastError) {
+            // Handle error, e.g. if background script is not ready
+            console.error(chrome.runtime.lastError.message);
+            return;
+        }
+        if (response && response.lang) {
+            const detectedButton = document.getElementById(response.lang);
+            if (detectedButton) {
+                detectedButton.classList.add('detected');
+            }
+        }
+    });
+
     const res = await chrome.storage.local.get('cached_languages');
     if (res.cached_languages && res.cached_languages.length > 0) {
         buildPopup(res.cached_languages);

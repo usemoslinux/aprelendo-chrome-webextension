@@ -14,7 +14,9 @@
 	"tabs",    
 	"activeTab",
     "storage",
-	"commands"
+	"commands",
+	"contextMenus",
+	"scripting"
   ],
 
   "action": {

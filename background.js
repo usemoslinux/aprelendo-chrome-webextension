@@ -1,6 +1,9 @@
 import { languages } from './shared/languages.js';
+import { detectLang } from './shared/language_detector.js';
 
 // background.js
+
+const supportedLangCodes = new Set(languages.map(l => l.code));
 
 async function redirect(msg) {
     const [tab] = await chrome.tabs.query({ currentWindow: true, active: true });
@@ -17,24 +20,62 @@ async function redirect(msg) {
     await chrome.tabs.create({ url: aprelendo_url, active: true, index: (tab.index ?? 0) + 1 });
 }
 
-chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
-    // Keep the worker alive and reply when done
-    (async () => {
-        try {
-            await redirect(msg);
-            sendResponse({ ok: true });
-        } catch (e) {
-            console.error(e);
-            sendResponse({ ok: false, error: e?.message });
-        }
-    })();
-    return true; // important: keep service worker alive for async work
+async function detectTabLanguage(tab) {
+    if (!tab || !tab.id) return null;
+    try {
+        const results = await chrome.scripting.executeScript({
+            target: { tabId: tab.id },
+            func: () => document.body.innerText.slice(0, 2000)
+        });
+        const text = results[0].result;
+        if (!text) return null;
+        const detected = detectLang(text);
+        return supportedLangCodes.has(detected) ? detected : null;
+    } catch (e) {
+        // Can fail on special pages like chrome://
+        console.error("Language detection failed:", e);
+        return null;
+    }
+}
+
+chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
+    if (msg.action === 'getDetectedLanguage') {
+        (async () => {
+            const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+            const lang = await detectTabLanguage(tab);
+            sendResponse({ lang });
+        })();
+        return true; // Keep message port open for async response
+    }
+
+    // Handler for redirection from popup
+    if (msg.lang) {
+        (async () => {
+            try {
+                await redirect(msg);
+                sendResponse({ ok: true });
+            } catch (e) {
+                console.error(e);
+                sendResponse({ ok: false, error: e?.message });
+            }
+        })();
+        return true;
+    }
 });
 
 chrome.commands.onCommand.addListener(async (command) => {
     if (command === 'add-page') {
-        const res = await chrome.storage.sync.get(['shortcut_lang']);
-        const lang = (typeof res.shortcut_lang === "undefined") ? 'en' : res.shortcut_lang;
+        const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+        const detectedLang = await detectTabLanguage(tab);
+        const lang = detectedLang || (await chrome.storage.sync.get(['shortcut_lang'])).shortcut_lang || 'en';
+        try { await redirect({ lang }); } catch (e) { console.error(e); }
+    }
+});
+
+chrome.contextMenus.onClicked.addListener(async (info, tab) => {
+    if (info.menuItemId === 'add-page-auto-detect') {
+        const detectedLang = await detectTabLanguage(tab);
+        const lang = detectedLang || 'en';
         try { await redirect({ lang }); } catch (e) { console.error(e); }
     }
 });
@@ -48,7 +89,18 @@ async function cacheVisibleLanguages() {
     await chrome.storage.local.set({ cached_languages: visibleLangs });
 }
 
-chrome.runtime.onInstalled.addListener(cacheVisibleLanguages);
+chrome.runtime.onInstalled.addListener(() => {
+    // Create context menu
+    chrome.contextMenus.create({
+        id: "add-page-auto-detect",
+        title: "Add to Aprelendo (auto-detect language)",
+        contexts: ["page"]
+    });
+
+    // Initial caching of visible languages
+    cacheVisibleLanguages();
+});
+
 chrome.storage.onChanged.addListener((changes, namespace) => {
     if (namespace === 'sync') {
         const langSettingChanged = Object.keys(changes).some(key => key.startsWith('show_'));
