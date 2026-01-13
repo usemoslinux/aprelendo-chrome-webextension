@@ -1,9 +1,8 @@
-const languageCodes = [
-    'ar', 'bg', 'ca', 'zh', 'hr', 'cs', 'da', 'nl', 'en', 'fr', 'de', 'el', 'he', 'hi', 'hu', 
-    'it', 'ja', 'ko', 'no', 'pl', 'pt', 'ro', 'ru', 'sk', 'sl', 'es', 'sv', 'tr', 'vi'
-];
+import { languages } from './shared/languages.js';
 
-function saveOptions() {
+const languageCodes = languages.map(lang => lang.code);
+
+async function saveOptions() {
     let settings = {};
 
     languageCodes.forEach(code => {
@@ -12,25 +11,25 @@ function saveOptions() {
 
     settings["shortcut_lang"] = document.querySelector("#shortcut-lang").value;
 
-    chrome.storage.sync.set(settings, () => {
-        // Update message to let user know options were saved.
-        const msg = document.getElementById('message-block');
-        msg.classList.remove("hidden");
-        setTimeout(() => {
-            msg.classList.add("hidden");
-        }, 2000);
-    });
+    await chrome.storage.sync.set(settings);
+
+    // Update message to let user know options were saved.
+    const msg = document.getElementById('message-block');
+    msg.classList.remove("hidden");
+    setTimeout(() => {
+        msg.classList.add("hidden");
+    }, 2000);
 }
 
-function restoreOptions() {
+async function restoreOptions() {
     const keys = languageCodes.map(code => `show_${code}`).concat(["shortcut_lang"]);
 
-    chrome.storage.sync.get(keys, (res) => {
-        languageCodes.forEach(code => {
-            document.querySelector(`#${code}`).checked = (typeof res[`show_${code}`] !== 'undefined') ? res[`show_${code}`] : true;
-        });
-        document.querySelector("#shortcut-lang").value = (typeof res.shortcut_lang !== 'undefined') ? res.shortcut_lang : 'en';
+    const res = await chrome.storage.sync.get(keys);
+
+    languageCodes.forEach(code => {
+        document.querySelector(`#${code}`).checked = (typeof res[`show_${code}`] !== 'undefined') ? res[`show_${code}`] : true;
     });
+    document.querySelector("#shortcut-lang").value = (typeof res.shortcut_lang !== 'undefined') ? res.shortcut_lang : 'en';
 
     updateLocaleStrings();
 }
@@ -45,4 +44,3 @@ function updateLocaleStrings() {
 
 document.addEventListener("DOMContentLoaded", restoreOptions);
 document.querySelector("#save").addEventListener("click", saveOptions);
-

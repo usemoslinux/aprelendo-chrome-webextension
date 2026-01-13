@@ -1,3 +1,5 @@
+import { languages } from './shared/languages.js';
+
 // background.js
 
 async function redirect(msg) {
@@ -34,5 +36,24 @@ chrome.commands.onCommand.addListener(async (command) => {
         const res = await chrome.storage.sync.get(['shortcut_lang']);
         const lang = (typeof res.shortcut_lang === "undefined") ? 'en' : res.shortcut_lang;
         try { await redirect({ lang }); } catch (e) { console.error(e); }
+    }
+});
+
+async function cacheVisibleLanguages() {
+    const keys = languages.map(l => `show_${l.code}`);
+    const settings = await chrome.storage.sync.get(keys);
+    const visibleLangs = languages.filter(lang =>
+        settings[`show_${lang.code}`] || typeof settings[`show_${lang.code}`] === 'undefined'
+    );
+    await chrome.storage.local.set({ cached_languages: visibleLangs });
+}
+
+chrome.runtime.onInstalled.addListener(cacheVisibleLanguages);
+chrome.storage.onChanged.addListener((changes, namespace) => {
+    if (namespace === 'sync') {
+        const langSettingChanged = Object.keys(changes).some(key => key.startsWith('show_'));
+        if (langSettingChanged) {
+            cacheVisibleLanguages();
+        }
     }
 });
