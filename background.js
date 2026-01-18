@@ -5,6 +5,11 @@ import { detectLang } from './shared/language_detector.js';
 
 const supportedLangCodes = new Set(languages.map(l => l.code));
 
+async function getShortcutFallbackLang() {
+    const { shortcut_lang } = await chrome.storage.sync.get(['shortcut_lang']);
+    return shortcut_lang || 'en';
+}
+
 async function redirect(msg) {
     const [tab] = await chrome.tabs.query({ currentWindow: true, active: true });
     if (!tab || !tab.url) throw new Error("No active tab URL.");
@@ -67,7 +72,7 @@ chrome.commands.onCommand.addListener(async (command) => {
     if (command === 'add-page') {
         const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
         const detectedLang = await detectTabLanguage(tab);
-        const lang = detectedLang || (await chrome.storage.sync.get(['shortcut_lang'])).shortcut_lang || 'en';
+        const lang = detectedLang || await getShortcutFallbackLang();
         try { await redirect({ lang }); } catch (e) { console.error(e); }
     }
 });
@@ -75,7 +80,7 @@ chrome.commands.onCommand.addListener(async (command) => {
 chrome.contextMenus.onClicked.addListener(async (info, tab) => {
     if (info.menuItemId === 'add-page-auto-detect') {
         const detectedLang = await detectTabLanguage(tab);
-        const lang = detectedLang || 'en';
+        const lang = detectedLang || await getShortcutFallbackLang();
         try { await redirect({ lang }); } catch (e) { console.error(e); }
     }
 });
