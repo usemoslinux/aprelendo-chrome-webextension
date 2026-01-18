@@ -10,6 +10,11 @@ async function getShortcutFallbackLang() {
     return shortcut_lang || 'en';
 }
 
+async function shouldOpenInNewTab() {
+    const { open_in_new_tab } = await chrome.storage.sync.get(['open_in_new_tab']);
+    return typeof open_in_new_tab === 'undefined' ? true : open_in_new_tab;
+}
+
 async function redirect(msg) {
     const [tab] = await chrome.tabs.query({ currentWindow: true, active: true });
     if (!tab || !tab.url) throw new Error("No active tab URL.");
@@ -22,7 +27,12 @@ async function redirect(msg) {
         ? `https://www.aprelendo.com/addvideo.php?lang=${lang}&url=${encodeURIComponent(tab.url)}`
         : `https://www.aprelendo.com/addtext.php?lang=${lang}&url=${encodeURIComponent(tab.url)}`;
 
-    await chrome.tabs.create({ url: aprelendo_url, active: true, index: (tab.index ?? 0) + 1 });
+    const openInNewTab = await shouldOpenInNewTab();
+    if (openInNewTab) {
+        await chrome.tabs.create({ url: aprelendo_url, active: true, index: (tab.index ?? 0) + 1 });
+    } else if (tab.id) {
+        await chrome.tabs.update(tab.id, { url: aprelendo_url, active: true });
+    }
 }
 
 async function detectTabLanguage(tab) {
