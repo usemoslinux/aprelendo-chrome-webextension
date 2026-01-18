@@ -2,6 +2,7 @@ import { languages } from '../shared/languages.js';
 
 document.addEventListener("DOMContentLoaded", async () => {
     const popup = document.querySelector("#popup-content");
+    let detectedLang = null;
 
     function buildPopup(visibleLangs) {
         for (const lang of visibleLangs) {
@@ -10,6 +11,18 @@ document.addEventListener("DOMContentLoaded", async () => {
             el.className = `button ${lang.code}`;
             el.textContent = chrome.i18n.getMessage(lang.name);
             popup.appendChild(el);
+        }
+        if (detectedLang) {
+            highlightDetected(detectedLang);
+        }
+    }
+
+    function highlightDetected(lang) {
+        detectedLang = lang;
+        const detectedButton = document.getElementById(lang);
+        if (detectedButton) {
+            detectedButton.classList.add('detected');
+            detectedButton.scrollIntoView({ block: 'center' });
         }
     }
 
@@ -21,10 +34,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             return;
         }
         if (response && response.lang) {
-            const detectedButton = document.getElementById(response.lang);
-            if (detectedButton) {
-                detectedButton.classList.add('detected');
-            }
+            highlightDetected(response.lang);
         }
     });
 
