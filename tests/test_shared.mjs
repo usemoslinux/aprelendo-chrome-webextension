@@ -48,4 +48,19 @@ assert.strictEqual(
     "https://www.aprelendo.com/addvideo.php?lang=es&url=https%3A%2F%2Fyoutu.be%2FdQw4w9WgXcQ"
 );
 
+assert.throws(
+    () => buildAprelendoUrl("chrome://extensions", "en"),
+    /cannot be sent to Aprelendo/
+);
+
+assert.throws(
+    () => buildAprelendoUrl("chrome-extension://abc/options.html", "en"),
+    /cannot be sent to Aprelendo/
+);
+
+assert.throws(
+    () => buildAprelendoUrl("not a valid url", "en"),
+    /page URL is invalid/
+);
+
 console.log("All tests passed!");

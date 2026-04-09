@@ -1,9 +1,23 @@
 import { languages } from "../shared/languages.js";
 const browser = globalThis.browser || globalThis.chrome;
 
+const GENERIC_ADD_ERROR = "The current page could not be added to Aprelendo.";
+
 document.addEventListener("DOMContentLoaded", async () => {
   const popup = document.querySelector("#popup-content");
+  const popupError = document.querySelector("#popup-error");
   let detectedLang = null;
+  let busy = false;
+
+  function showError(message) {
+    popupError.textContent = message || GENERIC_ADD_ERROR;
+    popupError.classList.remove("hidden");
+  }
+
+  function clearError() {
+    popupError.textContent = "";
+    popupError.classList.add("hidden");
+  }
 
   function buildPopup(visibleLangs) {
     const fragment = document.createDocumentFragment();
@@ -25,7 +39,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     detectedLang = lang;
     const detectedButton = document.getElementById(lang);
     if (detectedButton) {
-      // Remove 'detected' class from any other button just in case
       const current = popup.querySelector(".detected");
       if (current) current.classList.remove("detected");
 
@@ -42,7 +55,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
-  // Ask background script for detected language of the current tab
   browser.runtime
     .sendMessage({ action: "getDetectedLanguage" })
     .then((response) => {
@@ -59,59 +71,52 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (res.cached_languages && res.cached_languages.length > 0) {
       buildPopup(res.cached_languages);
     } else {
-      // Fallback: fetch from sync storage if local cache is empty
       const keys = languages.map((l) => `show_${l.code}`);
-      const sync_res = await browser.storage.sync.get(keys);
+      const syncRes = await browser.storage.sync.get(keys);
       const visibleLangs = languages.filter(
         (lang) =>
-          sync_res[`show_${lang.code}`] ||
-          typeof sync_res[`show_${lang.code}`] === "undefined",
+          syncRes[`show_${lang.code}`] ||
+          typeof syncRes[`show_${lang.code}`] === "undefined",
       );
       buildPopup(visibleLangs);
     }
   } catch (e) {
     console.error("Failed to load languages:", e);
-    // Emergency fallback: show all languages
     buildPopup(languages);
   }
 
   popup.tabIndex = -1;
   popup.focus();
 
-  let busy = false;
-
-  const handlePick = async (e) => {
-    const btn = e.target.closest(".button");
+  async function submitSelection(btn) {
     if (!btn || busy) return;
     busy = true;
+    clearError();
 
     try {
-      await browser.runtime.sendMessage({ lang: btn.id });
+      const response = await browser.runtime.sendMessage({ lang: btn.id });
+      if (!response?.ok) {
+        throw new Error(response?.error || GENERIC_ADD_ERROR);
+      }
+      setTimeout(() => window.close(), 0);
     } catch (error) {
       console.error("Failed to send selection:", error);
-    } finally {
-      // close even if failed — but only once
-      setTimeout(() => window.close(), 0);
+      showError(error instanceof Error ? error.message : GENERIC_ADD_ERROR);
+      busy = false;
     }
-  };
+  }
 
-  // Use click so scrolling doesn't trigger a selection on touch devices.
-  popup.addEventListener("click", handlePick);
+  popup.addEventListener("click", async (e) => {
+    const btn = e.target.closest(".button");
+    await submitSelection(btn);
+  });
 
-  // Optional keyboard support (Enter/Space) without using 'click'
   document.addEventListener("keydown", async (e) => {
     if ((e.key === "Enter" || e.key === " ") && !busy) {
       const btn = document.activeElement?.closest?.(".button");
       if (btn) {
         e.preventDefault();
-        busy = true;
-        try {
-          await browser.runtime.sendMessage({ lang: btn.id });
-        } catch (error) {
-          console.error("Failed to send selection:", error);
-        } finally {
-          setTimeout(() => window.close(), 0);
-        }
+        await submitSelection(btn);
       }
     }
   });
