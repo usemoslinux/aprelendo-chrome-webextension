@@ -55,6 +55,7 @@ function createBackgroundBrowser({
   tabsQueryResult = [],
   scriptResult = { pageLang: '', text: '' },
   syncGet = async () => ({}),
+  localGet = async () => ({}),
   localizedMenuTitle = 'Localized menu title',
 } = {}) {
   const runtimeOnMessage = createEventHook();
@@ -89,6 +90,7 @@ function createBackgroundBrowser({
         get: syncGet,
       },
       local: {
+        get: localGet,
         async set(value) {
           calls.localSet.push(value);
         },
@@ -515,6 +517,46 @@ test('background command flow falls back to shortcut language when detection fai
   assert.equal(calls.tabsCreate.length, 1);
   assert.match(calls.tabsCreate[0].url, /lang=es/);
   assert.match(calls.tabsCreate[0].url, /example\.com%2Farticle/);
+});
+
+test('background uses a configured self-hosted Aprelendo server', async (t) => {
+  const { browser, hooks, calls } = createBackgroundBrowser({
+    tabsQueryResult: [{ id: 9, url: 'https://example.com/article', index: 0 }],
+    syncGet: async (keys) => {
+      if (Array.isArray(keys) && keys.includes('open_in_new_tab')) {
+        return { open_in_new_tab: true };
+      }
+      return {};
+    },
+    localGet: async (keys) => {
+      if (Array.isArray(keys) && keys.includes('aprelendo_base_url')) {
+        return { aprelendo_base_url: 'https://self-hosted.example/aprelendo/' };
+      }
+      return {};
+    },
+  });
+  const restore = installGlobals({
+    browser,
+    chrome: undefined,
+    document: undefined,
+    window: undefined,
+    requestAnimationFrame: undefined,
+    console: quietConsole,
+    console: quietConsole,
+  });
+  t.after(restore);
+
+  await importFresh('./background.js');
+  const response = await callMessageListener(hooks.runtimeOnMessage.listeners[0], {
+    lang: 'en',
+  });
+
+  assert.deepEqual(response, { ok: true });
+  assert.equal(calls.tabsCreate.length, 1);
+  assert.equal(
+    calls.tabsCreate[0].url,
+    'https://self-hosted.example/aprelendo/addtext.php?lang=en&url=https%3A%2F%2Fexample.com%2Farticle',
+  );
 });
 
 test('popup renders native buttons and focuses the detected language', async (t) => {

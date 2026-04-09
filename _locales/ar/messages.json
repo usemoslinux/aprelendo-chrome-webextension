@@ -122,6 +122,18 @@
   "openInNewTabOptLabel": {
     "message": "افتح Aprelendo في علامة تبويب جديدة عند إضافة صفحة"
   },
+  "aprelendoServerUrlOptLabel": {
+    "message": "عنوان URL لخادم Aprelendo:"
+  },
+  "aprelendoServerUrlHelp": {
+    "message": "إعداد متقدم: غيّر هذا فقط إذا كنت تستضيف Aprelendo بنفسك. اترك هذا الحقل فارغًا لمواصلة استخدام https://www.aprelendo.com."
+  },
+  "errorOptMsgTitle": {
+    "message": "خطأ"
+  },
+  "aprelendoServerUrlInvalidError": {
+    "message": "أدخل عنوان URL صالحًا للخادم باستخدام http:// أو https://."
+  },
   "__WET_LOCALE__": {
     "message": "ar"
   }

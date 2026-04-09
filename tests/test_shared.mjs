@@ -1,5 +1,9 @@
 import { detectLang } from '../shared/language_detector.js';
-import { buildAprelendoUrl } from '../shared/url_builder.js';
+import {
+  DEFAULT_APRELENDO_BASE_URL,
+  buildAprelendoUrl,
+  normalizeAprelendoBaseUrl,
+} from '../shared/url_builder.js';
 import assert from 'assert';
 
 console.log("Running tests...");
@@ -50,6 +54,12 @@ const textUrl = "https://example.com/article";
 const videoUrl = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
 const shortVideoUrl = "https://youtu.be/dQw4w9WgXcQ";
 
+assert.strictEqual(normalizeAprelendoBaseUrl(""), DEFAULT_APRELENDO_BASE_URL);
+assert.strictEqual(
+  normalizeAprelendoBaseUrl(" https://self-hosted.example/aprelendo/// "),
+  "https://self-hosted.example/aprelendo",
+);
+
 assert.strictEqual(
   buildAprelendoUrl(textUrl, "en"),
   "https://www.aprelendo.com/addtext.php?lang=en&url=https%3A%2F%2Fexample.com%2Farticle",
@@ -63,6 +73,16 @@ assert.strictEqual(
 assert.strictEqual(
   buildAprelendoUrl(shortVideoUrl, "es"),
   "https://www.aprelendo.com/addvideo.php?lang=es&url=https%3A%2F%2Fyoutu.be%2FdQw4w9WgXcQ",
+);
+
+assert.strictEqual(
+  buildAprelendoUrl(textUrl, "en", "https://self-hosted.example/aprelendo/"),
+  "https://self-hosted.example/aprelendo/addtext.php?lang=en&url=https%3A%2F%2Fexample.com%2Farticle",
+);
+
+assert.throws(
+  () => normalizeAprelendoBaseUrl("ftp://self-hosted.example"),
+  /must use http:\/\/ or https:\/\//,
 );
 
 assert.throws(

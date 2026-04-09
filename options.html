@@ -169,14 +169,20 @@
         <label for="open-in-new-tab" data-i18n-content="openInNewTabOptLabel"></label>
     </section>
 
+    <section class="option" id="opt-aprelendo-base-url">
+        <label for="aprelendo-base-url" data-i18n-content="aprelendoServerUrlOptLabel"></label>
+        <input type="url" id="aprelendo-base-url" class="text-input" inputmode="url" spellcheck="false">
+        <p class="option-help" data-i18n-content="aprelendoServerUrlHelp"></p>
+    </section>
+
     <br>
 
     <section class="footer">
       <button id="save" class="button" data-i18n-content="saveBtnOpt" type="button"></button>
 
       <span class="message message-success hidden" id="message-block">
-          <span class="message-head" data-i18n-content="successOptMsgTitle"></span>
-          <span class="message-body" data-i18n-content="successOptMsgText"></span>
+          <span class="message-head" id="message-title" data-i18n-content="successOptMsgTitle"></span>
+          <span class="message-body" id="message-body" data-i18n-content="successOptMsgText"></span>
       </span>
     </section>
 

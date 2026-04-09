@@ -1,6 +1,9 @@
 import { languages } from "./shared/languages.js";
 import { detectLang } from "./shared/language_detector.js";
-import { buildAprelendoUrl } from "./shared/url_builder.js";
+import {
+  buildAprelendoUrl,
+  normalizeAprelendoBaseUrl,
+} from "./shared/url_builder.js";
 
 // background.js
 const browser = globalThis.browser || globalThis.chrome;
@@ -24,17 +27,25 @@ async function getShortcutFallbackLang() {
   return shortcut_lang || "en";
 }
 
+async function getConfiguredAprelendoBaseUrl() {
+  const { aprelendo_base_url } = await browser.storage.local.get([
+    "aprelendo_base_url",
+  ]);
+  return normalizeAprelendoBaseUrl(aprelendo_base_url);
+}
+
 async function redirect(msg) {
   const tabs = await browser.tabs.query({ currentWindow: true, active: true });
   const tab = tabs && tabs[0];
   if (!tab || !tab.url) throw new Error("No active tab URL.");
 
   const lang = msg.lang;
-  const aprelendo_url = buildAprelendoUrl(tab.url, lang);
-
-  const { open_in_new_tab } = await browser.storage.sync.get([
-    "open_in_new_tab",
+  const [{ open_in_new_tab }, aprelendoBaseUrl] = await Promise.all([
+    browser.storage.sync.get(["open_in_new_tab"]),
+    getConfiguredAprelendoBaseUrl(),
   ]);
+  const aprelendo_url = buildAprelendoUrl(tab.url, lang, aprelendoBaseUrl);
+
   const openInNewTab =
     typeof open_in_new_tab === "undefined" ? true : open_in_new_tab;
 

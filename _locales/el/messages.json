@@ -122,6 +122,18 @@
   "openInNewTabOptLabel": {
     "message": "Άνοιγμα του Aprelendo σε νέα καρτέλα κατά την προσθήκη σελίδας"
   },
+  "aprelendoServerUrlOptLabel": {
+    "message": "URL διακομιστή Aprelendo:"
+  },
+  "aprelendoServerUrlHelp": {
+    "message": "Για προχωρημένους: αλλάξτε αυτό μόνο αν φιλοξενείτε μόνοι σας το Aprelendo. Αφήστε αυτό το πεδίο κενό για να συνεχίσετε να χρησιμοποιείτε το https://www.aprelendo.com."
+  },
+  "errorOptMsgTitle": {
+    "message": "Σφάλμα"
+  },
+  "aprelendoServerUrlInvalidError": {
+    "message": "Εισαγάγετε έγκυρο URL διακομιστή με http:// ή https://."
+  },
   "__WET_LOCALE__": {
     "message": "el"
   }

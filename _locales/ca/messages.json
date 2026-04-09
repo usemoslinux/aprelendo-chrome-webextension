@@ -122,6 +122,18 @@
   "openInNewTabOptLabel": {
     "message": "Obre Aprelendo en una pestanya nova en afegir una pàgina"
   },
+  "aprelendoServerUrlOptLabel": {
+    "message": "URL del servidor d'Aprelendo:"
+  },
+  "aprelendoServerUrlHelp": {
+    "message": "Opció avançada: canvia això només si allotges Aprelendo pel teu compte. Deixa aquest camp buit per continuar fent servir https://www.aprelendo.com."
+  },
+  "errorOptMsgTitle": {
+    "message": "Error"
+  },
+  "aprelendoServerUrlInvalidError": {
+    "message": "Introdueix un URL de servidor vàlid amb http:// o https://."
+  },
   "__WET_LOCALE__": {
     "message": "ca"
   }

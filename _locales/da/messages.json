@@ -122,6 +122,18 @@
   "openInNewTabOptLabel": {
     "message": "Åbn Aprelendo i en ny fane, når du tilføjer en side"
   },
+  "aprelendoServerUrlOptLabel": {
+    "message": "URL til Aprelendo-server:"
+  },
+  "aprelendoServerUrlHelp": {
+    "message": "Avanceret: ændr kun dette, hvis du selv hoster Aprelendo. Lad feltet stå tomt for fortsat at bruge https://www.aprelendo.com."
+  },
+  "errorOptMsgTitle": {
+    "message": "Fejl"
+  },
+  "aprelendoServerUrlInvalidError": {
+    "message": "Angiv en gyldig server-URL med http:// eller https://."
+  },
   "__WET_LOCALE__": {
     "message": "da"
   }

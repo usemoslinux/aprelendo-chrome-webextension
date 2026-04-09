@@ -122,6 +122,18 @@
   "openInNewTabOptLabel": {
     "message": "Oldal hozzáadásakor az Aprelendo megnyitása új lapon"
   },
+  "aprelendoServerUrlOptLabel": {
+    "message": "Aprelendo-kiszolgáló URL-je:"
+  },
+  "aprelendoServerUrlHelp": {
+    "message": "Haladó beállítás: ezt csak akkor módosítsd, ha saját magad hosztolod az Aprelendót. Hagyd üresen ezt a mezőt, ha továbbra is a https://www.aprelendo.com oldalt szeretnéd használni."
+  },
+  "errorOptMsgTitle": {
+    "message": "Hiba"
+  },
+  "aprelendoServerUrlInvalidError": {
+    "message": "Adj meg egy érvényes kiszolgáló-URL-t http:// vagy https:// használatával."
+  },
   "__WET_LOCALE__": {
     "message": "hu"
   }

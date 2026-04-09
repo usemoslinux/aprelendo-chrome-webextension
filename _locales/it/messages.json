@@ -122,6 +122,18 @@
   "openInNewTabOptLabel": {
     "message": "Apri Aprelendo in una nuova scheda quando aggiungi una pagina"
   },
+  "aprelendoServerUrlOptLabel": {
+    "message": "URL del server Aprelendo:"
+  },
+  "aprelendoServerUrlHelp": {
+    "message": "Avanzato: modifica questo solo se ospiti Aprelendo autonomamente. Lascia vuoto questo campo per continuare a usare https://www.aprelendo.com."
+  },
+  "errorOptMsgTitle": {
+    "message": "Errore"
+  },
+  "aprelendoServerUrlInvalidError": {
+    "message": "Inserisci un URL del server valido con http:// o https://."
+  },
   "__WET_LOCALE__": {
     "message": "it"
   }

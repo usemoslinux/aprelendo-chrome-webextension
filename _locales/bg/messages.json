@@ -122,6 +122,18 @@
   "openInNewTabOptLabel": {
     "message": "Отваряне на Aprelendo в нов раздел при добавяне на страница"
   },
+  "aprelendoServerUrlOptLabel": {
+    "message": "URL адрес на сървъра на Aprelendo:"
+  },
+  "aprelendoServerUrlHelp": {
+    "message": "Разширена настройка: променяйте това само ако самостоятелно хоствате Aprelendo. Оставете полето празно, за да продължите да използвате https://www.aprelendo.com."
+  },
+  "errorOptMsgTitle": {
+    "message": "Грешка"
+  },
+  "aprelendoServerUrlInvalidError": {
+    "message": "Въведете валиден URL адрес на сървъра с http:// или https://."
+  },
   "__WET_LOCALE__": {
     "message": "bg"
   }

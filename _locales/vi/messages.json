@@ -122,6 +122,18 @@
   "openInNewTabOptLabel": {
     "message": "Mở Aprelendo trong tab mới khi thêm trang"
   },
+  "aprelendoServerUrlOptLabel": {
+    "message": "URL máy chủ Aprelendo:"
+  },
+  "aprelendoServerUrlHelp": {
+    "message": "Nâng cao: chỉ thay đổi mục này nếu bạn tự lưu trữ Aprelendo. Hãy để trống trường này để tiếp tục dùng https://www.aprelendo.com."
+  },
+  "errorOptMsgTitle": {
+    "message": "Lỗi"
+  },
+  "aprelendoServerUrlInvalidError": {
+    "message": "Nhập URL máy chủ hợp lệ với http:// hoặc https://."
+  },
   "__WET_LOCALE__": {
     "message": "vi"
   }

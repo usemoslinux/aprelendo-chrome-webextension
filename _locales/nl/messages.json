@@ -122,6 +122,18 @@
   "openInNewTabOptLabel": {
     "message": "Aprelendo openen in een nieuw tabblad bij het toevoegen van een pagina"
   },
+  "aprelendoServerUrlOptLabel": {
+    "message": "Aprelendo-server-URL:"
+  },
+  "aprelendoServerUrlHelp": {
+    "message": "Geavanceerd: wijzig dit alleen als je Aprelendo zelf host. Laat dit veld leeg om https://www.aprelendo.com te blijven gebruiken."
+  },
+  "errorOptMsgTitle": {
+    "message": "Fout"
+  },
+  "aprelendoServerUrlInvalidError": {
+    "message": "Voer een geldige server-URL in met http:// of https://."
+  },
   "__WET_LOCALE__": {
     "message": "nl"
   }

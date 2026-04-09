@@ -122,6 +122,18 @@
   "openInNewTabOptLabel": {
     "message": "Při přidání stránky otevřít Aprelendo na nové kartě"
   },
+  "aprelendoServerUrlOptLabel": {
+    "message": "URL serveru Aprelendo:"
+  },
+  "aprelendoServerUrlHelp": {
+    "message": "Pokročilé: změňte toto pouze v případě, že Aprelendo hostujete sami. Toto pole ponechte prázdné, pokud chcete dál používat https://www.aprelendo.com."
+  },
+  "errorOptMsgTitle": {
+    "message": "Chyba"
+  },
+  "aprelendoServerUrlInvalidError": {
+    "message": "Zadejte platnou URL serveru s http:// nebo https://."
+  },
   "__WET_LOCALE__": {
     "message": "cs"
   }

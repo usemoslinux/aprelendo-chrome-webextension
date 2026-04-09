@@ -122,6 +122,18 @@
   "openInNewTabOptLabel": {
     "message": "Otvori Aprelendo u novoj kartici pri dodavanju stranice"
   },
+  "aprelendoServerUrlOptLabel": {
+    "message": "URL Aprelendo poslužitelja:"
+  },
+  "aprelendoServerUrlHelp": {
+    "message": "Napredno: promijenite ovo samo ako sami hostate Aprelendo. Ostavite ovo polje praznim kako biste nastavili koristiti https://www.aprelendo.com."
+  },
+  "errorOptMsgTitle": {
+    "message": "Pogreška"
+  },
+  "aprelendoServerUrlInvalidError": {
+    "message": "Unesite valjani URL poslužitelja s http:// ili https://."
+  },
   "__WET_LOCALE__": {
     "message": "hr"
   }
