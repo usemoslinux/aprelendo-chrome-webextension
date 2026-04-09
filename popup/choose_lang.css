@@ -1,15 +1,27 @@
 .button {
+    appearance: none;
+    background-color: transparent;
     background-position: 0.25rem;
     background-repeat: no-repeat;
     background-size: 1rem;
+    border: 1px solid transparent;
     border-radius: 3px;
+    box-sizing: border-box;
     color: black;
     cursor: pointer;
+    display: block;
     font-family: system-ui, Arial, Helvetica, sans-serif;
     font-size: 1rem;
     margin: 0;
     padding: 0.25rem 1.25rem 0.25rem 1.75rem;
+    text-align: left;
     user-select: none;
+    width: 100%;
+}
+
+.button:focus-visible {
+    outline: 2px solid #005fcc;
+    outline-offset: -2px;
 }
 
 #popup-error {
@@ -33,7 +45,7 @@
 
 .button.detected {
     background-color: #f0f8ff;
-    border: 1px solid #007bff;
+    border-color: #007bff;
 }
 
 .button.ar {
@@ -150,11 +162,6 @@
 
 .button.vi {
     background-image: url("../icons/flags/vi.svg");
-}
-
-#popup-content:focus {
-    outline: none;
-    box-shadow: none;
 }
 
 html {
