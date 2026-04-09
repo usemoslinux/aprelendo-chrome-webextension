@@ -110,7 +110,19 @@
   "saveBtnOpt": {
     "message": "Uložiť"
   },
-
-  "__WET_LOCALE__": { "message": "sk" }
+  "actionTitle": {
+    "message": "Pridať do Aprelendo"
+  },
+  "contextMenuAutoDetectTitle": {
+    "message": "Pridať do Aprelendo (automaticky rozpoznať jazyk)"
+  },
+  "optionsPageTitle": {
+    "message": "Možnosti Aprelendo"
+  },
+  "openInNewTabOptLabel": {
+    "message": "Pri pridaní stránky otvoriť Aprelendo na novej karte"
+  },
+  "__WET_LOCALE__": {
+    "message": "sk"
+  }
 }
-

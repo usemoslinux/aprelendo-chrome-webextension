@@ -110,6 +110,18 @@
   "saveBtnOpt": {
     "message": "保存"
   },
+  "actionTitle": {
+    "message": "添加到 Aprelendo"
+  },
+  "contextMenuAutoDetectTitle": {
+    "message": "添加到 Aprelendo（自动检测语言）"
+  },
+  "optionsPageTitle": {
+    "message": "Aprelendo 选项"
+  },
+  "openInNewTabOptLabel": {
+    "message": "添加页面时在新标签页中打开 Aprelendo"
+  },
   "__WET_LOCALE__": {
     "message": "zh"
   }

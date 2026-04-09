@@ -152,7 +152,7 @@ browser.runtime.onInstalled.addListener(() => {
   // Create context menu
   browser.contextMenus.create({
     id: "add-page-auto-detect",
-    title: "Add to Aprelendo (auto-detect language)",
+    title: browser.i18n.getMessage("contextMenuAutoDetectTitle"),
     contexts: ["page"],
   });
 

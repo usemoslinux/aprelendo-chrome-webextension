@@ -110,6 +110,18 @@
   "saveBtnOpt": {
     "message": "Zapisz"
   },
+  "actionTitle": {
+    "message": "Dodaj do Aprelendo"
+  },
+  "contextMenuAutoDetectTitle": {
+    "message": "Dodaj do Aprelendo (automatycznie wykryj język)"
+  },
+  "optionsPageTitle": {
+    "message": "Opcje Aprelendo"
+  },
+  "openInNewTabOptLabel": {
+    "message": "Otwórz Aprelendo w nowej karcie podczas dodawania strony"
+  },
   "__WET_LOCALE__": {
     "message": "pl"
   }

@@ -110,7 +110,19 @@
   "saveBtnOpt": {
     "message": "Spara"
   },
-
-  "__WET_LOCALE__": { "message": "sv" }
+  "actionTitle": {
+    "message": "Lägg till i Aprelendo"
+  },
+  "contextMenuAutoDetectTitle": {
+    "message": "Lägg till i Aprelendo (identifiera språk automatiskt)"
+  },
+  "optionsPageTitle": {
+    "message": "Aprelendo-inställningar"
+  },
+  "openInNewTabOptLabel": {
+    "message": "Öppna Aprelendo i en ny flik när du lägger till en sida"
+  },
+  "__WET_LOCALE__": {
+    "message": "sv"
+  }
 }
-

@@ -110,6 +110,18 @@
   "saveBtnOpt": {
     "message": "Speichern"
   },
+  "actionTitle": {
+    "message": "Zu Aprelendo hinzufügen"
+  },
+  "contextMenuAutoDetectTitle": {
+    "message": "Zu Aprelendo hinzufügen (Sprache automatisch erkennen)"
+  },
+  "optionsPageTitle": {
+    "message": "Aprelendo-Optionen"
+  },
+  "openInNewTabOptLabel": {
+    "message": "Aprelendo beim Hinzufügen einer Seite in einem neuen Tab öffnen"
+  },
   "__WET_LOCALE__": {
     "message": "de"
   }

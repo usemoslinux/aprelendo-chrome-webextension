@@ -110,6 +110,18 @@
   "saveBtnOpt": {
     "message": "Salvar"
   },
+  "actionTitle": {
+    "message": "Adicionar ao Aprelendo"
+  },
+  "contextMenuAutoDetectTitle": {
+    "message": "Adicionar ao Aprelendo (detetar idioma automaticamente)"
+  },
+  "optionsPageTitle": {
+    "message": "Opções do Aprelendo"
+  },
+  "openInNewTabOptLabel": {
+    "message": "Abrir o Aprelendo num novo separador ao adicionar uma página"
+  },
   "__WET_LOCALE__": {
     "message": "pt"
   }

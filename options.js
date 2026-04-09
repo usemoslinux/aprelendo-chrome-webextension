@@ -47,7 +47,7 @@ function updateLocaleStrings() {
   const i18nElements = document.querySelectorAll("[data-i18n-content]");
   i18nElements.forEach((element) => {
     const i18nMessageName = element.getAttribute("data-i18n-content");
-    element.innerText = browser.i18n.getMessage(i18nMessageName);
+    element.textContent = browser.i18n.getMessage(i18nMessageName);
   });
 }
 

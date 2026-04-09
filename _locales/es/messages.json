@@ -91,6 +91,19 @@
     "message": "Guardar",
     "hash": "aa14043bd4e6f79db542868539be9220"
   },
-
-  "__WET_LOCALE__": { "message": "es" }
+  "actionTitle": {
+    "message": "Añadir a Aprelendo"
+  },
+  "contextMenuAutoDetectTitle": {
+    "message": "Añadir a Aprelendo (detectar idioma automáticamente)"
+  },
+  "optionsPageTitle": {
+    "message": "Opciones de Aprelendo"
+  },
+  "openInNewTabOptLabel": {
+    "message": "Abrir Aprelendo en una pestaña nueva al añadir una página"
+  },
+  "__WET_LOCALE__": {
+    "message": "es"
+  }
 }

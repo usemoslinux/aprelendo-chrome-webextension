@@ -16,7 +16,7 @@
 
   "action": {
     "default_icon": "icons/aprelendo16.png",
-    "default_title": "Add to Aprelendo",
+    "default_title": "__MSG_actionTitle__",
     "default_popup": "popup/choose_lang.html"
   },
 

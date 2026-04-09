@@ -110,6 +110,18 @@
   "saveBtnOpt": {
     "message": "保存"
   },
+  "actionTitle": {
+    "message": "Aprelendo に追加"
+  },
+  "contextMenuAutoDetectTitle": {
+    "message": "Aprelendo に追加（言語を自動検出）"
+  },
+  "optionsPageTitle": {
+    "message": "Aprelendo のオプション"
+  },
+  "openInNewTabOptLabel": {
+    "message": "ページを追加するときに Aprelendo を新しいタブで開く"
+  },
   "__WET_LOCALE__": {
     "message": "ja"
   }

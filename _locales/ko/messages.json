@@ -110,6 +110,18 @@
   "saveBtnOpt": {
     "message": "저장"
   },
+  "actionTitle": {
+    "message": "Aprelendo에 추가"
+  },
+  "contextMenuAutoDetectTitle": {
+    "message": "Aprelendo에 추가 (언어 자동 감지)"
+  },
+  "optionsPageTitle": {
+    "message": "Aprelendo 옵션"
+  },
+  "openInNewTabOptLabel": {
+    "message": "페이지를 추가할 때 Aprelendo를 새 탭에서 열기"
+  },
   "__WET_LOCALE__": {
     "message": "ko"
   }

@@ -110,6 +110,18 @@
   "saveBtnOpt": {
     "message": "Kaydet"
   },
+  "actionTitle": {
+    "message": "Aprelendo'ya ekle"
+  },
+  "contextMenuAutoDetectTitle": {
+    "message": "Aprelendo'ya ekle (dili otomatik algıla)"
+  },
+  "optionsPageTitle": {
+    "message": "Aprelendo seçenekleri"
+  },
+  "openInNewTabOptLabel": {
+    "message": "Bir sayfa eklerken Aprelendo'yu yeni bir sekmede aç"
+  },
   "__WET_LOCALE__": {
     "message": "tr"
   }

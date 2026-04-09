@@ -110,6 +110,18 @@
   "saveBtnOpt": {
     "message": "Сохранить"
   },
+  "actionTitle": {
+    "message": "Добавить в Aprelendo"
+  },
+  "contextMenuAutoDetectTitle": {
+    "message": "Добавить в Aprelendo (автоопределение языка)"
+  },
+  "optionsPageTitle": {
+    "message": "Параметры Aprelendo"
+  },
+  "openInNewTabOptLabel": {
+    "message": "Открывать Aprelendo в новой вкладке при добавлении страницы"
+  },
   "__WET_LOCALE__": {
     "message": "ru"
   }

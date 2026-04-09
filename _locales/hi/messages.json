@@ -110,6 +110,18 @@
   "saveBtnOpt": {
     "message": "सहेजें"
   },
+  "actionTitle": {
+    "message": "Aprelendo में जोड़ें"
+  },
+  "contextMenuAutoDetectTitle": {
+    "message": "Aprelendo में जोड़ें (भाषा का स्वतः पता लगाएँ)"
+  },
+  "optionsPageTitle": {
+    "message": "Aprelendo विकल्प"
+  },
+  "openInNewTabOptLabel": {
+    "message": "पेज जोड़ते समय Aprelendo को नए टैब में खोलें"
+  },
   "__WET_LOCALE__": {
     "message": "hi"
   }
