@@ -10,9 +10,22 @@ assert.strictEqual(detectLang("This is a simple English sentence."), "en");
 assert.strictEqual(detectLang("Ceci est une phrase française simple."), "fr");
 assert.strictEqual(detectLang("Dies ist ein einfacher deutscher Satz."), "de");
 assert.strictEqual(detectLang("Esta es una oración simple en español."), "es");
+assert.strictEqual(
+    detectLang("Aquesta és una frase senzilla en català amb paraules comunes."),
+    "ca"
+);
 assert.strictEqual(detectLang("这是一个简单的中文句子。"), "zh"); // Chinese
+assert.strictEqual(
+    detectLang("Това е просто българско изречение на български език."),
+    "bg"
+);
 assert.strictEqual(detectLang("Это простое русское предложение."), "ru"); // Russian
 assert.strictEqual(detectLang("こんにちは、これは日本語です。"), "ja"); // Japanese
+assert.strictEqual(
+    detectLang("Tiếng Việt có dấu và đây là một câu đơn giản để kiểm tra."),
+    "vi"
+);
+assert.strictEqual(detectLang("???"), null);
 
 // Test URL Builder
 console.log("Testing URL Builder...");

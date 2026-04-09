@@ -7,6 +7,18 @@ const browser = globalThis.browser || globalThis.chrome;
 
 const supportedLangCodes = new Set(languages.map((l) => l.code));
 
+function normalizeSupportedLang(code) {
+  if (!code) return null;
+
+  const normalized = String(code)
+    .split(",")[0]
+    .trim()
+    .toLowerCase()
+    .split(/[-_]/)[0];
+
+  return supportedLangCodes.has(normalized) ? normalized : null;
+}
+
 async function getShortcutFallbackLang() {
   const { shortcut_lang } = await browser.storage.sync.get(["shortcut_lang"]);
   return shortcut_lang || "en";
@@ -42,10 +54,18 @@ async function detectTabLanguage(tab) {
   try {
     const results = await browser.scripting.executeScript({
       target: { tabId: tab.id },
-      func: () => document.body.innerText.slice(0, 5000), // Increased limit for better accuracy
+      func: () => ({
+        pageLang: document.documentElement?.lang || "",
+        text: document.body?.innerText?.slice(0, 5000) || "",
+      }),
     });
-    const text = results && results[0] && results[0].result;
+    const payload = results && results[0] && results[0].result;
+    const hintedLang = normalizeSupportedLang(payload?.pageLang);
+    if (hintedLang) return hintedLang;
+
+    const text = payload?.text;
     if (!text) return null;
+
     const detected = detectLang(text);
     return supportedLangCodes.has(detected) ? detected : null;
   } catch (e) {
