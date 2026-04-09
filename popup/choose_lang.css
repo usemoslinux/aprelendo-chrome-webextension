@@ -13,6 +13,8 @@
     font-family: system-ui, Arial, Helvetica, sans-serif;
     font-size: 1rem;
     margin: 0;
+    overflow: hidden;
+    overflow: hidden;
     padding: 0.25rem 1.25rem 0.25rem 1.75rem;
     text-align: left;
     user-select: none;
@@ -169,14 +171,18 @@ html {
 }
 
 body {
+    display: flex;
+    flex-direction: column;
     margin: 0;
+    overflow: hidden;
     width: 20rem;
     min-height: 300px;
     max-height: 600px;
 }
 
 #popup-content {
-    max-height: 600px;
+    flex: 1 1 auto;
+    min-height: 0;
     overflow-y: auto;
     padding-bottom: 0.25rem;
     -webkit-overflow-scrolling: touch;
